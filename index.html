@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index.css">
+    <title>Pagination</title>
+</head>
+
+<body>
+    <div id="page-selection">
+        <label for="page-number">Page: </label>
+        <select id="page-number">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17" selected>17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+        </select>
+        <label for="total-pages">of </label>
+        <select id="total-pages">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20" selected>20</option>
+        </select>
+    </div>
+    <br>
+    <hr>
+    <br>
+
+    <div id="pagination-panel"></div>
+</body>
+
+<script>
+    // Script that can only run once on page load
+    function Paginate() {
+        const paginationPanel = document.getElementById('pagination-panel');
+        const pageWidth = document.documentElement.clientWidth;
+
+        let x = parseInt(document.getElementById('page-number').value);
+        let y = parseInt(document.getElementById('total-pages').value);
+
+        const arrowLeftButton = document.createElement('button');
+        arrowLeftButton.textContent = '←';
+
+        const firstButton = document.createElement('button');
+        firstButton.textContent = '1';
+
+        const xminus6Button = document.createElement('button');
+        xminus6Button.textContent = x - 6;
+
+        const xminus5Button = document.createElement('button');
+        xminus5Button.textContent = x - 5;
+
+        const xminus4Button = document.createElement('button');
+        xminus4Button.textContent = x - 4;
+
+        const xminus3Button = document.createElement('button');
+        xminus3Button.textContent = x - 3;
+
+        const xminus2Button = document.createElement('button');
+        xminus2Button.textContent = x - 2;
+
+        const xminus1Button = document.createElement('button');
+        xminus1Button.textContent = x - 1;
+
+        const xButton = document.createElement('button');
+        xButton.textContent = x;
+
+        const xplus1Button = document.createElement('button');
+        xplus1Button.textContent = x + 1;
+
+        const xplus2Button = document.createElement('button');
+        xplus2Button.textContent = x + 2;
+
+        const xplus3Button = document.createElement('button');
+        xplus3Button.textContent = x + 3;
+
+        const xplus4Button = document.createElement('button');
+        xplus4Button.textContent = x + 4;
+
+        const xplus5Button = document.createElement('button');
+        xplus5Button.textContent = x + 5;  
+
+        const xplus6Button = document.createElement('button');
+        xplus6Button.textContent = x + 6;
+
+        const lastButton = document.createElement('button');
+        lastButton.textContent = y;
+
+        const arrowRightButton = document.createElement('button');
+        arrowRightButton.textContent = '→';
+
+        const ellipsis1 = document.createElement('span');
+        ellipsis1.textContent = '...';
+        const ellipsis2 = document.createElement('span');
+        ellipsis2.textContent = '...';
+
+        paginationPanel.innerHTML = ''; // Clear previous content
+
+
+
+        if (pageWidth < 375) {
+            // < Page x of y >
+            const pageButton = document.createElement('button');
+            pageButton.textContent = 'Page ' + x + ' of ' + y;
+            pageButton.className = "page-label";
+            paginationPanel.appendChild(arrowLeftButton);
+            paginationPanel.appendChild(pageButton);
+            paginationPanel.appendChild(arrowRightButton);
+
+        } else if (pageWidth >= 375 && pageWidth < 480) {
+            // 5 items: < 1 ... X ... y >
+            // Exception: x==3 or x==y-2 (no ellipsis at 2 or y-1)
+            // TODO: Add logic to render correct buttons and handle exceptions
+            const z = 5;
+            if (x!=1 && x != 2 && x != 3 && x != y - 2 && x != y - 1 && x != y) {
+                
+
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 1) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            
+            else if (x == 2) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 3) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 2) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 1) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+
+            else if (x == y) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+
+        } else if (pageWidth >= 480 && pageWidth < 536) {
+            // 7 items: < 1 ... x-1 X x+1 ... y >
+            // Exception: x==4 or x==y-3 (no ellipsis at 2 or y-1)
+            // TODO: Add logic to render correct buttons and handle exceptions
+            const z = 7;
+            
+            if (x != 1 && x != 2 && x !=3 &&  x != 4 && x != y - 3 && x != y - 2 && x != y - 1 && x != y) {
+                
+
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+
+            }
+            else if (x == 1) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(xplus3Button);
+                paginationPanel.appendChild(xplus4Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 2) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(xplus3Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 3) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 4) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 3) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(lastButton)
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 2) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 1) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus3Button);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus4Button);
+                paginationPanel.appendChild(xminus3Button);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+        } else if (pageWidth >= 536) {
+            // 9 items: < 1 ... x-2 x-1 X x+1 x+2 ... y >
+            // Exception: x==5 or x==y-4 (no ellipsis at 2 or y-1)
+            // TODO: Add logic to render correct buttons and handle exceptions
+            if (x != 1 && x != 2 && x != 3 && x != 4 && x != 5 && x != y - 4 && x != y - 3 && x != y - 2 && x != y - 1 && x != y) {
+                const z = 9;
+
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 1) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(xplus3Button);
+                paginationPanel.appendChild(xplus4Button);
+                paginationPanel.appendChild(xplus5Button);
+                paginationPanel.appendChild(xplus6Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 2) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(xplus3Button);
+                paginationPanel.appendChild(xplus4Button);
+                paginationPanel.appendChild(xplus5Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 3) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(xplus3Button);
+                paginationPanel.appendChild(xplus4Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == 4) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(xplus3Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton)
+                paginationPanel.appendChild(arrowRightButton);
+
+            }
+            else if (x == 5) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(xminus3Button);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(ellipsis2);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 4) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(xplus3Button);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 3) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus3Button);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(xplus2Button);
+                paginationPanel.appendChild(lastButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+            else if (x == y - 2) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus4Button);
+                paginationPanel.appendChild(xminus3Button);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(xplus1Button);
+                paginationPanel.appendChild(lastButton)
+                paginationPanel.appendChild(arrowRightButton);
+
+            }
+            else if (x == y - 1) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus5Button);
+                paginationPanel.appendChild(xminus4Button);
+                paginationPanel.appendChild(xminus3Button);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button)
+                paginationPanel.appendChild(xButton)
+                paginationPanel.appendChild(lastButton)
+                paginationPanel.appendChild(arrowRightButton);
+
+            }
+            else if (x == y) {
+                paginationPanel.appendChild(arrowLeftButton);
+                paginationPanel.appendChild(firstButton);
+                paginationPanel.appendChild(ellipsis1);
+                paginationPanel.appendChild(xminus6Button);
+                paginationPanel.appendChild(xminus5Button);
+                paginationPanel.appendChild(xminus4Button);
+                paginationPanel.appendChild(xminus3Button);
+                paginationPanel.appendChild(xminus2Button);
+                paginationPanel.appendChild(xminus1Button);
+                paginationPanel.appendChild(xButton);
+                paginationPanel.appendChild(arrowRightButton);
+            }
+        }
+    }
+
+    // Initial render
+    Paginate();
+    // Re-render pagination when dropdowns change
+    document.getElementById('page-number').addEventListener('change', Paginate);
+    document.getElementById('total-pages').addEventListener('change', Paginate);
+    window.addEventListener('resize', Paginate);
+</script>
+
+</html>
