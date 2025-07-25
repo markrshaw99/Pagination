@@ -38,13 +38,13 @@
     padding: 0;
     margin: 0;
     border-radius: 50%;
-    border: 2px solid #524e4e;   /* Light, uniform border */
-    outline: none;            /* Remove default focus outline */
-    box-shadow: none;         /* Remove any default shadow */
+    border: 2px solid #524e4e; 
+    outline: none;           
+    box-shadow: none;        
 }
 #pagination-panel button:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #90caf9; /* Optional: subtle blue focus ring for accessibility */
+    box-shadow: 0 0 0 2px #90caf9;
 }
 #page-selection {
   display: flex;
