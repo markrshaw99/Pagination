@@ -129,9 +129,26 @@
         const ellipsis2 = document.createElement('span');
         ellipsis2.textContent = '...';
 
+        const onebutton = document.createElement('button');
+        onebutton.textContent = '1';
+
+        const twoButton = document.createElement('button');
+        twoButton.textContent = '2';
+
+        const threeButton = document.createElement('button');
+        threeButton.textContent = '3';
+
+        const fourButton = document.createElement('button');
+        fourButton.textContent = '4';
+
+        const fiveButton = document.createElement('button');
+        fiveButton.textContent = '5';
+
+
+
         paginationPanel.innerHTML = ''; // Clear previous content
 
-
+        
 
         if (pageWidth < 375) {
 
@@ -142,11 +159,40 @@
             paginationPanel.appendChild(pageButton);
             paginationPanel.appendChild(arrowRightButton);
 
-        } else if (pageWidth >= 375 && pageWidth < 480) {
+        } else if (pageWidth >= 375 && pageWidth < 480 || y <= 7) {
             
             const z = 5;
 
-            if (x!=1 && x != 2 && x != 3 && x != y - 2 && x != y - 1 && x != y) {
+            if (y <= 5) {
+
+                if (y === 1) {
+                    paginationPanel.appendChild(onebutton);
+                }
+                else if (y === 2) {
+                    paginationPanel.appendChild(onebutton);
+                    paginationPanel.appendChild(twoButton);
+                }
+                else if (y === 3) {
+                    paginationPanel.appendChild(onebutton);
+                    paginationPanel.appendChild(twoButton);
+                    paginationPanel.appendChild(threeButton);
+                }
+                else if (y === 4) {
+                    paginationPanel.appendChild(onebutton);
+                    paginationPanel.appendChild(twoButton);
+                    paginationPanel.appendChild(threeButton);
+                    paginationPanel.appendChild(fourButton);
+                }
+                else if (y === 5) {
+                    paginationPanel.appendChild(onebutton);
+                    paginationPanel.appendChild(twoButton);
+                    paginationPanel.appendChild(threeButton);
+                    paginationPanel.appendChild(fourButton);
+                    paginationPanel.appendChild(fiveButton);
+                }
+            }
+
+            else if (x!=1 && x != 2 && x != 3 && x != y - 2 && x != y - 1 && x != y) {
                 
 
                 paginationPanel.appendChild(arrowLeftButton);
@@ -214,9 +260,8 @@
                 paginationPanel.appendChild(arrowRightButton);
             }
 
-        } else if (pageWidth >= 480 && pageWidth < 536) {
+        } else if ((pageWidth >= 480 && pageWidth < 536) || y <= 9) {
 
-            
             const z = 7;
             
             if (x != 1 && x != 2 && x !=3 &&  x != 4 && x != y - 3 && x != y - 2 && x != y - 1 && x != y) {
@@ -321,7 +366,7 @@
                 paginationPanel.appendChild(xButton);
                 paginationPanel.appendChild(arrowRightButton);
             }
-        } else if (pageWidth >= 536) {
+        } else if ((pageWidth >= 536)) {
 
             
             if (x != 1 && x != 2 && x != 3 && x != 4 && x != 5 && x != y - 4 && x != y - 3 && x != y - 2 && x != y - 1 && x != y) {
