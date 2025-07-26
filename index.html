@@ -73,6 +73,11 @@
         let x = parseInt(document.getElementById('page-number').value);
         let y = parseInt(document.getElementById('total-pages').value);
 
+        if (x > y) {
+            paginationPanel.innerHTML = 'There\'s not that many pages you fool!';
+            return;
+        }
+
         const arrowLeftButton = document.createElement('button');
         arrowLeftButton.textContent = '←';
 
