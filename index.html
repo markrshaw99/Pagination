@@ -78,82 +78,37 @@
             return;
         }
 
-        const arrowLeftButton = document.createElement('button');
-        arrowLeftButton.textContent = '←';
 
-        const firstButton = document.createElement('button');
-        firstButton.textContent = '1';
+        function makeButton(num) {
+            const btn = document.createElement('button');
+            btn.textContent = num;
+            if (num === x) btn.style.background = '#888';
+            return btn;
+        }
 
-        const xminus6Button = document.createElement('button');
-        xminus6Button.textContent = x - 6;
-
-        const xminus5Button = document.createElement('button');
-        xminus5Button.textContent = x - 5;
-
-        const xminus4Button = document.createElement('button');
-        xminus4Button.textContent = x - 4;
-
-        const xminus3Button = document.createElement('button');
-        xminus3Button.textContent = x - 3;
-
-        const xminus2Button = document.createElement('button');
-        xminus2Button.textContent = x - 2;
-
-        const xminus1Button = document.createElement('button');
-        xminus1Button.textContent = x - 1;
-
-        const xButton = document.createElement('button');
-        xButton.textContent = x;
-
-        const xplus1Button = document.createElement('button');
-        xplus1Button.textContent = x + 1;
-
-        const xplus2Button = document.createElement('button');
-        xplus2Button.textContent = x + 2;
-
-        const xplus3Button = document.createElement('button');
-        xplus3Button.textContent = x + 3;
-
-        const xplus4Button = document.createElement('button');
-        xplus4Button.textContent = x + 4;
-
-        const xplus5Button = document.createElement('button');
-        xplus5Button.textContent = x + 5;  
-
-        const xplus6Button = document.createElement('button');
-        xplus6Button.textContent = x + 6;
-
-        const lastButton = document.createElement('button');
-        lastButton.textContent = y;
-
-        const arrowRightButton = document.createElement('button');
-        arrowRightButton.textContent = '→';
-
+        const arrowLeftButton = makeButton('←');
+        arrowLeftButton.classList.add('arrow');
+        const arrowRightButton = makeButton('→');
+        arrowRightButton.classList.add('arrow');
+        const firstButton = makeButton(1);
+        const xminus6Button = makeButton(x - 6);
+        const xminus5Button = makeButton(x - 5);
+        const xminus4Button = makeButton(x - 4);
+        const xminus3Button = makeButton(x - 3);
+        const xminus2Button = makeButton(x - 2);
+        const xminus1Button = makeButton(x - 1);
+        const xButton = makeButton(x);
+        const xplus1Button = makeButton(x + 1);
+        const xplus2Button = makeButton(x + 2);
+        const xplus3Button = makeButton(x + 3);
+        const xplus4Button = makeButton(x + 4);
+        const xplus5Button = makeButton(x + 5);
+        const xplus6Button = makeButton(x + 6);
+        const lastButton = makeButton(y);
         const ellipsis1 = document.createElement('span');
         ellipsis1.textContent = '...';
         const ellipsis2 = document.createElement('span');
         ellipsis2.textContent = '...';
-
-        const onebutton = document.createElement('button');
-        onebutton.textContent = '1';
-
-        const twoButton = document.createElement('button');
-        twoButton.textContent = '2';
-
-        const threeButton = document.createElement('button');
-        threeButton.textContent = '3';
-
-        const fourButton = document.createElement('button');
-        fourButton.textContent = '4';
-
-        const fiveButton = document.createElement('button');
-        fiveButton.textContent = '5';
-
-        const sixButton = document.createElement('button');
-        sixButton.textContent = '6';
-
-        const sevenButton = document.createElement('button');
-        sevenButton.textContent = '7';
 
 
 
@@ -170,37 +125,16 @@
             paginationPanel.appendChild(pageButton);
             paginationPanel.appendChild(arrowRightButton);
 
+
         } else if (pageWidth >= 375 && pageWidth < 480 || y < 7) {
-
             const z = 5;
-
-            if (y <= 5) {
-
-                if (y === 1) {
-                    paginationPanel.appendChild(onebutton);
+            if (y <= 7) {
+                paginationPanel.appendChild(arrowLeftButton);
+                for (let i = 1; i <= y; i++) {
+                    paginationPanel.appendChild(makeButton(i));
                 }
-                else if (y === 2) {
-                    paginationPanel.appendChild(onebutton);
-                    paginationPanel.appendChild(twoButton);
-                }
-                else if (y === 3) {
-                    paginationPanel.appendChild(onebutton);
-                    paginationPanel.appendChild(twoButton);
-                    paginationPanel.appendChild(threeButton);
-                }
-                else if (y === 4) {
-                    paginationPanel.appendChild(onebutton);
-                    paginationPanel.appendChild(twoButton);
-                    paginationPanel.appendChild(threeButton);
-                    paginationPanel.appendChild(fourButton);
-                }
-                else if (y === 5) {
-                    paginationPanel.appendChild(onebutton);
-                    paginationPanel.appendChild(twoButton);
-                    paginationPanel.appendChild(threeButton);
-                    paginationPanel.appendChild(fourButton);
-                    paginationPanel.appendChild(fiveButton);
-                }
+                paginationPanel.appendChild(arrowRightButton);
+                return;
             }
 
             else if (x!=1 && x != 2 && x != 3 && x != y - 2 && x != y - 1 && x != y) {
@@ -273,18 +207,13 @@
 
         } else if ((pageWidth >= 480 && pageWidth < 536) || y <= 9) {
 
-            const z = 7;
-
-            if ( y === 7) {
+            if (y === 7) {
                 paginationPanel.appendChild(arrowLeftButton);
-                paginationPanel.appendChild(onebutton);
-                paginationPanel.appendChild(twoButton);
-                paginationPanel.appendChild(threeButton);
-                paginationPanel.appendChild(fourButton);
-                paginationPanel.appendChild(fiveButton);
-                paginationPanel.appendChild(sixButton);
-                paginationPanel.appendChild(sevenButton);
+                for (let i = 1; i <= 7; i++) {
+                    paginationPanel.appendChild(makeButton(i));
+                }
                 paginationPanel.appendChild(arrowRightButton);
+                return;
             }
 
             else if (x != 1 && x != 2 && x !=3 &&  x != 4 && x != y - 3 && x != y - 2 && x != y - 1 && x != y) {
